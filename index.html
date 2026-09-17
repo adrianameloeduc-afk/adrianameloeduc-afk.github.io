@@ -4,184 +4,91 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#b97866">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>DRI — Minhas Demandas</title>
+<link rel="manifest" href="manifest.json">
 <style>
-:root{--rose:#b97866;--rose2:#d9a08f;--cream:#fffaf6;--ink:#4a3833;--muted:#8d7770;--line:#eadbd5;--green:#6e8b74;--yellow:#c89b45;--red:#b55b58}
+:root{--rose:#b97866;--rose2:#d9a08f;--cream:#fffaf6;--ink:#4a3833;--muted:#8d7770;--line:#eadbd5;--green:#6e8b74;--red:#b55b58;--soft:#f5e8e2}
 *{box-sizing:border-box}body{margin:0;background:#f4ebe6;color:var(--ink);font-family:Arial,sans-serif}.phone{max-width:430px;min-height:100vh;margin:auto;background:var(--cream);box-shadow:0 0 30px #0001}
-header{padding:18px 18px 10px;background:linear-gradient(180deg,#fffaf6,#f8eee9);position:sticky;top:0;z-index:2}.brand{display:flex;align-items:center;gap:11px}.brand img{width:54px;height:54px;object-fit:cover;border-radius:50%}.brand h1{font-family:Georgia,serif;font-size:21px;margin:0}.brand p{margin:3px 0 0;color:var(--muted);font-size:12px}
-.content{padding:14px 16px 88px}.date{font-size:13px;color:var(--muted);margin:4px 0 12px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.card{background:#fff;border:1px solid var(--line);border-radius:13px;padding:9px 4px;text-align:center}.card b{font-size:18px;display:block}.card span{font-size:9px;color:var(--muted)}
-.section{display:flex;justify-content:space-between;align-items:center;margin:20px 2px 9px}.section h2{font-size:16px;margin:0}.link{font-size:11px;color:var(--rose)}
-.add{width:100%;border:0;border-radius:14px;padding:13px;background:var(--rose);color:white;font-weight:bold;font-size:14px;box-shadow:0 7px 18px #b9786633}.quick{display:grid;grid-template-columns:1fr 52px;gap:7px}
-.task{background:#fff;border:1px solid var(--line);border-radius:14px;padding:11px;margin:7px 0;display:flex;gap:9px;align-items:flex-start}.check{width:22px;height:22px;border:2px solid var(--rose2);border-radius:50%;flex:none;background:#fff;cursor:pointer}.task.done .check{background:var(--green);border-color:var(--green)}.task.done .check:after{content:"✓";color:#fff;font-size:14px;display:block;text-align:center;line-height:18px}.task.done .title{text-decoration:line-through;color:#9b8e89}.title{font-size:13.5px;line-height:1.3}.meta{font-size:10px;color:var(--muted);margin-top:5px}.tag{display:inline-block;padding:3px 6px;border-radius:8px;background:#f5e8e2;margin-right:4px}.task-actions{margin-left:auto;display:flex;gap:4px}.tiny{border:0;background:#f8eee9;border-radius:8px;padding:5px 7px;color:var(--rose);font-size:10px}
-.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(430px,100%);background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:7px 7px calc(7px + env(safe-area-inset-bottom));z-index:3}.bottom button{border:0;background:none;color:var(--muted);font-size:10px}.bottom button.active{color:var(--rose);font-weight:bold}.bottom .ico{font-size:17px;display:block;margin-bottom:2px}
-.view{display:none}.view.active{display:block}.overlay{display:none;position:fixed;inset:0;background:#0006;z-index:5;align-items:flex-end}.sheet{width:min(430px,100%);margin:auto;background:var(--cream);border-radius:24px 24px 0 0;padding:19px}.sheet h3{margin:0 0 12px;font-family:Georgia,serif;font-size:20px}label{font-size:11px;color:var(--muted);display:block;margin:10px 0 5px}input,select{width:100%;padding:12px;border:1px solid var(--line);border-radius:11px;background:#fff;font-size:14px}.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.actions{display:flex;gap:8px;margin-top:14px}.actions button{flex:1;padding:11px;border-radius:11px;border:1px solid var(--line);background:#fff}.actions .save{background:var(--rose);border-color:var(--rose);color:#fff;font-weight:bold}
-.voicebox{display:none;margin-top:8px;padding:10px 12px;border-radius:12px;background:#f5e8e2;color:#6d5953;font-size:11px}.voicebox button{margin-top:7px;border:0;border-radius:9px;padding:8px 11px;background:var(--rose);color:#fff;font-weight:bold}.voice-text{margin-top:5px;line-height:1.4}
-.navrow{display:flex;align-items:center;justify-content:space-between;margin:14px 0 8px}.navrow button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 10px;color:var(--rose)}.navtitle{font-weight:bold;font-size:14px}.day{background:#fff;border:1px solid var(--line);border-radius:13px;padding:10px;margin:7px 0}.day-head{display:flex;justify-content:space-between;align-items:center}.day strong{font-size:12px}.count{font-size:10px;color:var(--muted)}.mini{font-size:11px;color:var(--muted);margin-top:6px;padding:6px 0;border-top:1px solid #f2e7e2}.empty{color:#b0a19b;font-size:11px;padding:7px 0}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.dow{text-align:center;color:var(--muted);font-size:9px;padding:3px}.cell{min-height:49px;background:#fff;border:1px solid var(--line);border-radius:9px;padding:5px;font-size:10px;cursor:pointer}.cell.muted{opacity:.4}.cell.today{outline:2px solid var(--rose2)}.cell .n{font-weight:bold}.dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--rose);margin:1px}
-.history-item{background:#fff;border:1px solid var(--line);border-radius:13px;padding:10px;margin:7px 0}.history-item .when{font-size:9px;color:var(--muted);margin-top:4px}.search{margin:8px 0}.search input{padding:10px}.notice{background:#f8eee9;border-radius:12px;padding:9px;font-size:10px;color:#6d5953;margin-top:9px}
+header{padding:18px 20px 12px;background:linear-gradient(180deg,#fffaf6,#f8eee9);position:sticky;top:0;z-index:2}.brand{display:flex;align-items:center;gap:12px}.brand img{width:52px;height:52px;object-fit:cover;border-radius:50%}.brand h1{font-family:Georgia,serif;font-size:21px;margin:0}.brand p{margin:3px 0 0;color:var(--muted);font-size:12px;letter-spacing:.3px}
+.content{padding:14px 18px 92px}.date{font-size:13px;color:var(--muted);margin:4px 0 14px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 5px;text-align:center}.card b{font-size:19px;display:block}.card span{font-size:10px;color:var(--muted)}
+.section{display:flex;justify-content:space-between;align-items:center;margin:21px 2px 10px}.section h2{font-size:16px;margin:0}.link{font-size:12px;color:var(--rose);cursor:pointer}.addrow{display:grid;grid-template-columns:1fr 54px;gap:8px}.add{width:100%;border:0;border-radius:15px;padding:14px;background:var(--rose);color:white;font-weight:bold;font-size:15px;box-shadow:0 7px 18px #b9786633}.voiceBtn{padding:0;font-size:21px}
+.task{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;margin:8px 0;display:flex;gap:10px;align-items:flex-start;cursor:pointer}.check{width:22px;height:22px;border:2px solid var(--rose2);border-radius:50%;flex:none;background:#fff;cursor:pointer}.task.done .check{background:var(--green);border-color:var(--green)}.task.done .check:after{content:"✓";color:#fff;font-size:14px;display:block;text-align:center;line-height:18px}.task.done .title{text-decoration:line-through;color:#9b8e89}.taskbody{min-width:0;flex:1}.title{font-size:14px;line-height:1.3}.meta{font-size:10px;color:var(--muted);margin-top:5px;line-height:1.5}.tag{display:inline-block;padding:3px 6px;border-radius:8px;background:var(--soft);margin-right:4px}.due.late{color:var(--red);font-weight:bold}.due.today{color:var(--rose);font-weight:bold}.editHint{font-size:10px;color:#aa9188;margin-top:4px}
+.empty{padding:16px;text-align:center;color:var(--muted);font-size:12px;border:1px dashed var(--line);border-radius:14px;background:#fff}.week{display:none}.weekday{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;margin:8px 0}.weekday strong{font-size:13px}.mini{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5}.mini.done{text-decoration:line-through}.history{display:none}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(430px,100%);background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:8px 8px calc(8px + env(safe-area-inset-bottom));z-index:3}.bottom button{border:0;background:none;color:var(--muted);font-size:10px}.bottom button.active{color:var(--rose);font-weight:bold}.bottom .ico{font-size:18px;display:block;margin-bottom:2px}
+.overlay{display:none;position:fixed;inset:0;background:#0006;z-index:5;align-items:flex-end}.sheet{width:min(430px,100%);max-height:92vh;overflow:auto;margin:auto;background:var(--cream);border-radius:24px 24px 0 0;padding:20px}.sheet h3{margin:0 0 14px;font-family:Georgia,serif;font-size:20px}label{font-size:11px;color:var(--muted);display:block;margin:12px 0 5px}input,select{width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;background:#fff;font-size:14px}.row{display:grid;grid-template-columns:1fr 1fr;gap:9px}.actions{display:flex;gap:8px;margin-top:16px}.actions button{flex:1;padding:12px;border-radius:12px;border:1px solid var(--line);background:#fff}.actions .save{background:var(--rose);border-color:var(--rose);color:#fff;font-weight:bold}.delete{background:#fff5f4!important;color:var(--red);border-color:#ecc9c6!important}.customDate{display:none;margin-top:8px}.voicebox{display:none;margin-top:10px;padding:12px;border-radius:14px;background:var(--soft);font-size:11px}.voicebox .transcript{margin-top:6px;line-height:1.45;font-size:13px}.voicebox button{margin-top:9px;border:0;border-radius:10px;padding:10px 12px;background:var(--rose);color:#fff;font-weight:bold}.voiceStatus{margin-top:7px;color:#9a7064}.small{font-size:10px;color:var(--muted)}
 </style>
 </head>
 <body>
 <div class="phone">
-<header><div class="brand"><div style="width:54px;height:54px;border-radius:50%;background:#ead7d0;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:18px;color:#8c5e53">Dri</div><div><h1>DRI — MINHAS DEMANDAS</h1><p>Organizar para respirar.</p></div></div></header>
+<header><div class="brand">
+<img src="dri.jpg" alt="Dri"> alt="DRI">
+<div><h1>DRI — MINHAS DEMANDAS</h1><p>Organizar para respirar.</p></div></div></header>
 <main class="content">
 <div class="date" id="todayLabel"></div>
 <div class="cards"><div class="card"><b id="late">0</b><span>Atrasadas</span></div><div class="card"><b id="doing">0</b><span>Em andamento</span></div><div class="card"><b id="waiting">0</b><span>Aguardando</span></div><div class="card"><b id="done">0</b><span>Concluídas</span></div></div>
-
-<section id="todayView" class="view active">
-<div class="section"><h2>☀️ Hoje</h2><span class="link" onclick="showView('all')">ver tudo</span></div>
-<div class="quick"><button class="add" onclick="openSheet()">＋ Nova demanda</button><button class="add" onclick="startVoice()" style="padding:0;font-size:21px">🎙️</button></div>
-<div id="voiceBox" class="voicebox"><b>🎙️ Transcrição</b><div id="transcript" class="voice-text"></div><div id="voiceStatus" style="margin-top:5px"></div><button onclick="saveVoice()">Salvar como demanda</button></div>
-<div id="todayTasks"></div>
-<div class="section"><h2>📥 Caixa de entrada</h2><span class="link" onclick="showView('all')">organizar depois</span></div><div id="inbox"></div>
-</section>
-
-<section id="weekView" class="view">
-<div class="navrow"><button onclick="shiftWeek(-1)">‹</button><div class="navtitle" id="weekTitle"></div><button onclick="shiftWeek(1)">›</button></div>
-<div style="text-align:center;margin-bottom:8px"><button class="tiny" onclick="goCurrentWeek()">Esta semana</button></div>
-<div id="weekDays"></div>
-</section>
-
-<section id="monthView" class="view">
-<div class="navrow"><button onclick="shiftMonth(-1)">‹</button><div class="navtitle" id="monthTitle"></div><button onclick="shiftMonth(1)">›</button></div>
-<div class="calendar" id="calendar"></div>
-<div class="notice">Toque em um dia para ver as demandas programadas.</div>
-<div id="monthDayDetails"></div>
-</section>
-
-<section id="historyView" class="view">
-<div class="section"><h2>✓ Histórico</h2></div>
-<div class="search"><input id="searchInput" placeholder="🔎 Buscar demanda..." oninput="renderHistory()"></div>
-<div id="history"></div>
-</section>
-
-<section id="allView" class="view">
-<div class="section"><h2>📋 Todas as demandas</h2></div><div class="search"><input id="allSearch" placeholder="🔎 Buscar..." oninput="renderAll()"></div><div id="allTasks"></div>
-</section>
+<div id="todayView"><div class="section"><h2>☀️ Hoje</h2><span class="link" onclick="showAllToday()">ver tudo</span></div>
+<div class="addrow"><button class="add" onclick="openSheet()">＋ Nova demanda</button><button class="add voiceBtn" onclick="startVoice()" title="Adicionar por voz">🎙️</button></div>
+<div id="voiceBox" class="voicebox"><b>🎙️ Transcrição</b><div id="transcript" class="transcript"></div><div id="voiceStatus" class="voiceStatus"></div><button onclick="saveVoiceTask()">Usar esta transcrição</button></div>
+<div id="tasks"></div></div>
+<div id="weekView" class="week"><div class="section"><h2>📅 Próximos 7 dias</h2></div><div id="weekList"></div></div>
+<div id="historyView" class="history"><div class="section"><h2>✓ Histórico</h2></div><div id="historyList"></div></div>
 </main>
-<nav class="bottom">
-<button class="active" data-view="today" onclick="showView('today')"><span class="ico">☀</span>Hoje</button>
-<button data-view="week" onclick="showView('week')"><span class="ico">▦</span>Semana</button>
-<button data-view="month" onclick="showView('month')"><span class="ico">▣</span>Mês</button>
-<button data-view="history" onclick="showView('history')"><span class="ico">✓</span>Histórico</button>
-</nav>
-
-<div class="overlay" id="overlay"><div class="sheet">
-<h3 id="sheetTitle">Nova demanda</h3>
-<label>O que você precisa fazer?</label><input id="newTitle" placeholder="Digite rapidinho…">
-<div class="row"><div><label>Quando?</label><select id="newWhen" onchange="toggleCustomDate()"><option value="today">Hoje</option><option value="tomorrow">Amanhã</option><option value="week">Esta semana</option><option value="custom">Escolher data</option><option value="none">Sem data</option></select></div>
+<nav class="bottom"><button id="navToday" class="active" onclick="show('today',this)"><span class="ico">☀</span>Hoje</button><button id="navWeek" onclick="show('week',this)"><span class="ico">▦</span>Semana</button><button id="navHistory" onclick="show('history',this)"><span class="ico">✓</span>Histórico</button><button onclick="openSheet()"><span class="ico">＋</span>Adicionar</button></nav>
+<div class="overlay" id="overlay"><div class="sheet"><h3 id="sheetTitle">Nova demanda</h3><label>O que você precisa fazer?</label><input id="newTitle" placeholder="Digite rapidinho…">
+<div class="row"><div><label>Quando?</label><select id="newDate" onchange="toggleCustomDate()"><option value="today">Hoje</option><option value="tomorrow">Amanhã</option><option value="week">Esta semana</option><option value="custom">Escolher data</option><option value="none">Sem data</option></select><div id="customDateWrap" class="customDate"><input id="customDate" type="date"></div></div>
 <div><label>Categoria</label><select id="newTag"><option>Trabalho</option><option>Casa</option><option>Financeiro</option><option>Pessoal</option><option>Outros</option></select></div></div>
-<div id="customDateWrap" style="display:none"><label>Data</label><input id="newDate" type="date"></div>
 <label>Status</label><select id="newStatus"><option value="todo">A fazer</option><option value="doing">Em andamento</option><option value="wait">Aguardando retorno</option><option value="done">Concluída</option></select>
-<div class="actions"><button onclick="closeSheet()">Cancelar</button><button class="save" onclick="saveTask()">Salvar demanda</button></div>
-</div></div>
-</div>
+<div class="actions"><button onclick="closeSheet()">Cancelar</button><button id="deleteBtn" class="delete" style="display:none" onclick="deleteCurrent()">Excluir</button><button class="save" onclick="saveTask()">Salvar demanda</button></div><div class="small" style="margin-top:9px">Você poderá tocar em qualquer demanda depois para editar texto, data, categoria ou status.</div></div></div>
 <script>
-const KEY='dri_minha_demandas_v5';
-let tasks=JSON.parse(localStorage.getItem(KEY)||'[]');
-let editingId=null, recognition=null, voiceText='';
-let weekOffset=0, monthOffset=0, selectedMonthDay=null;
-const pad=n=>String(n).padStart(2,'0');
-const iso=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
-const startOfWeek=d=>{let x=new Date(d);let day=x.getDay();let diff=day===0?-6:1-day;x.setDate(x.getDate()+diff);x.setHours(0,0,0,0);return x};
-const fmt=d=>d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'});
-const save=()=>localStorage.setItem(KEY,JSON.stringify(tasks));
-const today=new Date();today.setHours(0,0,0,0);
-document.getElementById('todayLabel').textContent=today.toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long'});
-
-function dateForTask(t){if(t.date)return new Date(t.date+'T00:00:00');return null}
-function taskLabel(t){let d=dateForTask(t);return d?d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'}):'Sem data'}
-function statusLabel(s){return {todo:'A fazer',doing:'Em andamento',wait:'Aguardando retorno',done:'Concluída'}[s]||'A fazer'}
-function renderCard(t){
- const div=document.createElement('div');div.className='task'+(t.status==='done'?' done':'');
- div.innerHTML=`<div class="check" onclick="finish('${t.id}')"></div><div style="flex:1"><div class="title">${esc(t.title)}</div><div class="meta"><span class="tag">${esc(t.tag)}</span>${taskLabel(t)} · ${statusLabel(t.status)}</div></div><div class="task-actions"><button class="tiny" onclick="editTask('${t.id}')">Editar</button></div>`;
- return div;
+const KEY='dri_tasks_v4';
+const initialTasks=[
+ {id:1,t:'Conferir avaliações do 2º ano',tag:'Trabalho',status:'doing',due:addDaysISO(0),created:Date.now()-300000},
+ {id:2,t:'Responder professora sobre avaliação',tag:'Trabalho',status:'doing',due:addDaysISO(0),created:Date.now()-200000},
+ {id:3,t:'Verificar documento pendente',tag:'Aguardando retorno',status:'wait',due:addDaysISO(1),created:Date.now()-100000},
+ {id:4,t:'Organizar reunião de amanhã',tag:'Trabalho',status:'doing',due:addDaysISO(1),created:Date.now()-50000}
+];
+let tasks=loadTasks(), editingId=null, recognition=null, voiceText='';
+function addDaysISO(n){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+n);return iso(d)}
+function iso(d){return d.toISOString().slice(0,10)}
+function parseDateLocal(s){if(!s)return null;const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d,12)}
+function todayISO(){return iso(new Date())}
+function loadTasks(){try{const x=JSON.parse(localStorage.getItem(KEY));return Array.isArray(x)?x:initialTasks}catch(e){return initialTasks}}
+function persist(){localStorage.setItem(KEY,JSON.stringify(tasks))}
+function esc(s){return String(s).replace(/[&<>\"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
+function dateLabel(v){if(!v)return 'Sem data';const d=parseDateLocal(v);const t=parseDateLocal(todayISO());const diff=Math.round((d-t)/86400000);if(diff===0)return 'Hoje';if(diff===1)return 'Amanhã';if(diff===-1)return 'Ontem';return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})}
+function fullDate(v){if(!v)return 'Sem data';return parseDateLocal(v).toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'2-digit'})}
+function statusLabel(s){return s==='doing'?'Em andamento':s==='wait'?'Aguardando retorno':s==='done'?'Concluída':'A fazer'}
+function render(){
+ const today=todayISO();const open=tasks.filter(x=>x.status!=='done');
+ document.getElementById('todayLabel').textContent=new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long'});
+ document.getElementById('late').textContent=open.filter(x=>x.due&&x.due<today).length;
+ document.getElementById('doing').textContent=tasks.filter(x=>x.status==='doing').length;
+ document.getElementById('waiting').textContent=tasks.filter(x=>x.status==='wait').length;
+ document.getElementById('done').textContent=tasks.filter(x=>x.status==='done').length;
+ const list=tasks.filter(x=>x.due===today || (!x.due && x.status!=='done')).sort(sortTasks);
+ const el=document.getElementById('tasks');el.innerHTML=list.length?list.map(taskHTML).join(''):'<div class="empty">Nenhuma demanda para hoje.</div>';
+ renderWeek();renderHistory();
 }
-function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-function isSame(a,b){return a&&b&&iso(a)===iso(b)}
-function renderStats(){
- let late=0,doing=0,wait=0,done=0;tasks.forEach(t=>{if(t.status==='done')done++;else if(t.status==='doing')doing++;else if(t.status==='wait')wait++;if(t.date&&new Date(t.date+'T00:00:00')<today&&t.status!=='done')late++});
- ['late','doing','waiting','done'].forEach((id,i)=>document.getElementById(id).textContent=[late,doing,wait,done][i]);
-}
-function renderToday(){
- let arr=tasks.filter(t=>t.status!=='done'&&t.date&&isSame(dateForTask(t),today)).sort((a,b)=>a.created-b.created);
- const el=document.getElementById('todayTasks');el.innerHTML='';arr.forEach(t=>el.appendChild(renderCard(t)));
- if(!arr.length)el.innerHTML='<div class="empty">Nenhuma demanda programada para hoje.</div>';
- let inbox=tasks.filter(t=>!t.date&&t.status!=='done');const ib=document.getElementById('inbox');ib.innerHTML='';inbox.forEach(t=>ib.appendChild(renderCard(t)));if(!inbox.length)ib.innerHTML='<div class="empty">Sua caixa de entrada está tranquila.</div>';
-}
-function weekDate(){let d=startOfWeek(today);d.setDate(d.getDate()+weekOffset*7);return d}
-function shiftWeek(n){weekOffset+=n;renderWeek()}
-function goCurrentWeek(){weekOffset=0;renderWeek()}
-function renderWeek(){
- let s=weekDate(),e=new Date(s);e.setDate(e.getDate()+6);
- document.getElementById('weekTitle').textContent=s.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'})+' – '+e.toLocaleDateString('pt-BR',{day:'2-digit',month:'short',year:'numeric'});
- const box=document.getElementById('weekDays');box.innerHTML='';
- for(let i=0;i<7;i++){let d=new Date(s);d.setDate(s.getDate()+i);let arr=tasks.filter(t=>t.date&&isSame(dateForTask(t),d)&&t.status!=='done');let el=document.createElement('div');el.className='day';el.innerHTML=`<div class="day-head"><strong>${d.toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'2-digit'}).toUpperCase()}</strong><span class="count">${arr.length?arr.length+' demanda(s)':''}</span></div>`;if(arr.length)arr.forEach(t=>{let mini=document.createElement('div');mini.className='mini';mini.innerHTML='☐ '+esc(t.title);mini.onclick=()=>editTask(t.id);el.appendChild(mini)});else{let x=document.createElement('div');x.className='empty';x.textContent='Nenhuma demanda programada';el.appendChild(x)}box.appendChild(el)}
-}
-function shiftMonth(n){monthOffset+=n;renderMonth()}
-function renderMonth(){
- let base=new Date(today.getFullYear(),today.getMonth()+monthOffset,1),y=base.getFullYear(),m=base.getMonth();
- document.getElementById('monthTitle').textContent=base.toLocaleDateString('pt-BR',{month:'long',year:'numeric'});
- const cal=document.getElementById('calendar');cal.innerHTML='';['SEG','TER','QUA','QUI','SEX','SÁB','DOM'].forEach(x=>{let d=document.createElement('div');d.className='dow';d.textContent=x;cal.appendChild(d)});
- let first=new Date(y,m,1),start=(first.getDay()+6)%7,days=new Date(y,m+1,0).getDate();
- for(let i=0;i<start;i++){let c=document.createElement('div');c.className='cell muted';cal.appendChild(c)}
- for(let day=1;day<=days;day++){let d=new Date(y,m,day);let arr=tasks.filter(t=>t.date&&isSame(dateForTask(t),d)&&t.status!=='done');let c=document.createElement('div');c.className='cell'+(isSame(d,today)?' today':'');c.innerHTML='<div class="n">'+day+'</div>'+arr.slice(0,3).map(()=>'<span class="dot"></span>').join('');c.onclick=()=>showMonthDay(d);cal.appendChild(c)}
- document.getElementById('monthDayDetails').innerHTML=selectedMonthDay&&selectedMonthDay.getMonth()===m?monthDetails(selectedMonthDay):'<div class="empty">Toque em um dia para ver suas demandas.</div>';
-}
-function showMonthDay(d){selectedMonthDay=d;renderMonth()}
-function monthDetails(d){let arr=tasks.filter(t=>t.date&&isSame(dateForTask(t),d));let h='<div class="section"><h2>📅 '+d.toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long'})+'</h2></div>';if(!arr.length)return h+'<div class="empty">Nenhuma demanda neste dia.</div>';return h+arr.map(t=>'<div class="history-item"><b>'+esc(t.title)+'</b><div class="when">'+esc(t.tag)+' · '+statusLabel(t.status)+' <button class="tiny" onclick="editTask(\''+t.id+'\')">Editar</button></div></div>').join('')}
-function renderHistory(){
- let q=(document.getElementById('searchInput').value||'').toLowerCase();let arr=tasks.filter(t=>t.status==='done'&&(!q||t.title.toLowerCase().includes(q)));let h=document.getElementById('history');h.innerHTML='';if(!arr.length){h.innerHTML='<div class="empty">Ainda não há demandas concluídas.</div>';return}arr.sort((a,b)=>(b.completedAt||0)-(a.completedAt||0)).forEach(t=>{let x=document.createElement('div');x.className='history-item';x.innerHTML='<b>'+esc(t.title)+'</b><div class="when">'+esc(t.tag)+' · concluída em '+new Date(t.completedAt||t.created).toLocaleString('pt-BR')+'</div>';h.appendChild(x)})
-}
-function renderAll(){
- let q=(document.getElementById('allSearch').value||'').toLowerCase();let arr=tasks.filter(t=>!q||t.title.toLowerCase().includes(q));let h=document.getElementById('allTasks');h.innerHTML='';arr.sort((a,b)=>b.created-a.created).forEach(t=>h.appendChild(renderCard(t)));if(!arr.length)h.innerHTML='<div class="empty">Nenhuma demanda encontrada.</div>'
-}
-function showView(v){
- document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));document.getElementById(v+'View').classList.add('active');
- document.querySelectorAll('.bottom button').forEach(b=>b.classList.toggle('active',b.dataset.view===v));
- if(v==='week')renderWeek();if(v==='month')renderMonth();if(v==='history')renderHistory();if(v==='all')renderAll();
-}
-function openSheet(id=null){
- editingId=id;document.getElementById('sheetTitle').textContent=id?'Editar demanda':'Nova demanda';
- let t=id?tasks.find(x=>x.id===id):null;document.getElementById('newTitle').value=t?t.title:'';document.getElementById('newTag').value=t?t.tag:'Trabalho';document.getElementById('newStatus').value=t?t.status:'todo';
- if(t&&t.date){document.getElementById('newWhen').value='custom';document.getElementById('newDate').value=t.date}else{document.getElementById('newWhen').value=t?'none':'today';document.getElementById('newDate').value=''}toggleCustomDate();document.getElementById('overlay').style.display='flex';setTimeout(()=>document.getElementById('newTitle').focus(),80)
-}
-function closeSheet(){document.getElementById('overlay').style.display='none'}
-function toggleCustomDate(){document.getElementById('customDateWrap').style.display=document.getElementById('newWhen').value==='custom'?'block':'none'}
-function selectedDate(){
- let w=document.getElementById('newWhen').value,d=new Date(today);
- if(w==='today')return iso(d);if(w==='tomorrow'){d.setDate(d.getDate()+1);return iso(d)}if(w==='custom')return document.getElementById('newDate').value||null;if(w==='week'){d=startOfWeek(d);d.setDate(d.getDate()+4);return iso(d)}return null
-}
-function saveTask(){
- let title=document.getElementById('newTitle').value.trim();if(!title)return;
- let data={title,tag:document.getElementById('newTag').value,status:document.getElementById('newStatus').value,date:selectedDate()};
- if(editingId){let t=tasks.find(x=>x.id===editingId);Object.assign(t,data);if(t.status==='done'&&!t.completedAt)t.completedAt=Date.now();if(t.status!=='done')delete t.completedAt}else tasks.unshift({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random()),...data,created:Date.now()});
- save();closeSheet();renderAllViews()
-}
+function sortTasks(a,b){return (a.status==='done')-(b.status==='done') || (a.due||'9999').localeCompare(b.due||'9999') || (b.created||0)-(a.created||0)}
+function taskHTML(x){const late=x.status!=='done'&&x.due&&x.due<todayISO();const due=x.due?dateLabel(x.due):'Sem data';return `<div class="task ${x.status==='done'?'done':''}" onclick="editTask(${x.id})"><div class="check" onclick="event.stopPropagation();finish(${x.id})"></div><div class="taskbody"><div class="title">${esc(x.t)}</div><div class="meta"><span class="tag">${esc(x.tag)}</span><span class="due ${late?'late':''} ${x.due===todayISO()?'today':''}">${due}</span> · ${statusLabel(x.status)}</div><div class="editHint">Toque para editar</div></div></div>`}
+function finish(id){const x=tasks.find(t=>t.id===id);if(!x)return;x.status=x.status==='done'?'todo':'done';x.completedAt=x.status==='done'?Date.now():null;persist();render()}
+function openSheet(id=null){editingId=id;document.getElementById('overlay').style.display='flex';document.getElementById('sheetTitle').textContent=id?'Editar demanda':'Nova demanda';document.getElementById('deleteBtn').style.display=id?'block':'none';if(id){const x=tasks.find(t=>t.id===id);fillForm(x)}else{clearForm()}setTimeout(()=>document.getElementById('newTitle').focus(),80)}
 function editTask(id){openSheet(id)}
-function finish(id){let t=tasks.find(x=>x.id===id);if(!t)return;t.status='done';t.completedAt=Date.now();save();renderAllViews()}
-function deleteTask(id){if(confirm('Excluir esta demanda?')){tasks=tasks.filter(t=>t.id!==id);save();renderAllViews()}}
-function renderAllViews(){renderStats();renderToday();renderWeek();renderMonth();renderHistory();if(document.getElementById('allView').classList.contains('active'))renderAll()}
-function startVoice(){
- const SR=window.SpeechRecognition||window.webkitSpeechRecognition;document.getElementById('voiceBox').style.display='block';document.getElementById('transcript').textContent='';document.getElementById('voiceStatus').textContent='Preparando o microfone…';voiceText='';
- if(!SR){document.getElementById('voiceStatus').textContent='O reconhecimento de voz não está disponível neste navegador.';return}
- recognition=new SR();recognition.lang='pt-BR';recognition.continuous=false;recognition.interimResults=true;
- recognition.onstart=()=>document.getElementById('voiceStatus').textContent='Pode falar. A Dri vai transformar sua fala em texto — sem reproduzir o áudio.';
- recognition.onresult=e=>{let finalText='',interim='';for(let i=e.resultIndex;i<e.results.length;i++){let p=e.results[i][0].transcript;if(e.results[i].isFinal)finalText+=p;else interim+=p}voiceText=(voiceText+' '+finalText).trim();document.getElementById('transcript').textContent=(voiceText+' '+interim).trim()};
- recognition.onerror=e=>document.getElementById('voiceStatus').textContent='Não consegui captar a fala ('+e.error+'). Verifique a permissão do microfone.';
- recognition.onend=()=>{if(voiceText)document.getElementById('voiceStatus').textContent='Transcrição pronta. Confira e salve.'};
- recognition.start()
-}
-function saveVoice(){
- let text=document.getElementById('transcript').textContent.trim();if(!text)return;
- let low=text.toLowerCase(),date=null;
- let m=low.match(/\b(?:dia\s*)?([0-3]?\d)[\/\-](\d{1,2})(?:\/(\d{2,4}))?\b/);
- if(m){let yy=m[3]?Number(m[3]):today.getFullYear();if(yy<100)yy+=2000;date=yy+'-'+pad(Number(m[2]))+'-'+pad(Number(m[1]))}
- else if(low.includes('amanhã')){let d=new Date(today);d.setDate(d.getDate()+1);date=iso(d)}
- else {let names=['domingo','segunda','terça','quarta','quinta','sexta','sábado'];for(let i=0;i<7;i++)if(low.includes(names[i])){let d=new Date(today),delta=(i-d.getDay()+7)%7;if(delta===0)delta=7;d.setDate(d.getDate()+delta);date=iso(d);break}}
- tasks.unshift({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random()),title:text.replace(/^dri[,:]?\s*/i,''),tag:'Trabalho',status:'todo',date,created:Date.now()});save();renderAllViews();document.getElementById('voiceStatus').textContent='Demanda salva'+(date?' para '+new Date(date+'T00:00:00').toLocaleDateString('pt-BR'):'');}
-renderAllViews();
+function clearForm(){document.getElementById('newTitle').value='';document.getElementById('newDate').value='today';document.getElementById('customDate').value='';document.getElementById('newTag').value='Trabalho';document.getElementById('newStatus').value='todo';toggleCustomDate()}
+function fillForm(x){document.getElementById('newTitle').value=x.t;document.getElementById('newTag').value=x.tag||'Trabalho';document.getElementById('newStatus').value=x.status||'todo';const t=todayISO();const tomorrow=addDaysISO(1);if(!x.due)document.getElementById('newDate').value='none';else if(x.due===t)document.getElementById('newDate').value='today';else if(x.due===tomorrow)document.getElementById('newDate').value='tomorrow';else {document.getElementById('newDate').value='custom';document.getElementById('customDate').value=x.due}toggleCustomDate()}
+function toggleCustomDate(){document.getElementById('customDateWrap').style.display=document.getElementById('newDate').value==='custom'?'block':'none'}
+function selectedDue(){const v=document.getElementById('newDate').value;if(v==='today')return todayISO();if(v==='tomorrow')return addDaysISO(1);if(v==='week')return addDaysISO(7);if(v==='custom')return document.getElementById('customDate').value||null;return null}
+function saveTask(){const t=document.getElementById('newTitle').value.trim();if(!t)return;const item={t,tag:document.getElementById('newTag').value,status:document.getElementById('newStatus').value,due:selectedDue()};if(editingId){const x=tasks.find(z=>z.id===editingId);Object.assign(x,item)}else{tasks.unshift({id:Date.now(),created:Date.now(),...item})}persist();closeSheet();render()}
+function deleteCurrent(){if(!editingId)return;if(confirm('Excluir esta demanda?')){tasks=tasks.filter(x=>x.id!==editingId);persist();closeSheet();render()}}
+function closeSheet(){document.getElementById('overlay').style.display='none';editingId=null}
+function renderWeek(){const base=new Date();base.setHours(12,0,0,0);let html='';for(let i=0;i<7;i++){const d=new Date(base);d.setDate(base.getDate()+i);const key=iso(d);const arr=tasks.filter(x=>x.due===key).sort(sortTasks);html+=`<div class="weekday"><strong>${d.toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'2-digit'}).toUpperCase()}</strong>${arr.length?arr.map(x=>`<div class="mini ${x.status==='done'?'done':''}" onclick="editTask(${x.id})">${x.status==='done'?'✓':'☐'} ${esc(x.t)}</div>`).join(''):'<div class="mini">— Nenhuma demanda programada</div>'}</div>`}document.getElementById('weekList').innerHTML=html}
+function renderHistory(){const arr=tasks.filter(x=>x.status==='done').sort((a,b)=>(b.completedAt||0)-(a.completedAt||0));document.getElementById('historyList').innerHTML=arr.length?arr.map(x=>`<div class="task done" onclick="editTask(${x.id})"><div class="check"></div><div class="taskbody"><div class="title">${esc(x.t)}</div><div class="meta"><span class="tag">${esc(x.tag)}</span>${x.completedAt?'Concluída em '+new Date(x.completedAt).toLocaleDateString('pt-BR'):''}</div></div></div>`).join(''):'<div class="empty">Ainda não há demandas concluídas.</div>'}
+function show(which,btn){document.querySelectorAll('.bottom button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');document.getElementById('todayView').style.display=which==='today'?'block':'none';document.getElementById('weekView').style.display=which==='week'?'block':'none';document.getElementById('historyView').style.display=which==='history'?'block':'none'}
+function showAllToday(){show('today',document.getElementById('navToday'));document.getElementById('tasks').scrollIntoView({behavior:'smooth'})}
+function startVoice(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;const box=document.getElementById('voiceBox'),tr=document.getElementById('transcript'),st=document.getElementById('voiceStatus');box.style.display='block';tr.textContent='';st.textContent='Preparando o microfone…';voiceText='';if(!SR){st.textContent='Este navegador não oferece reconhecimento de voz. Você pode digitar a demanda.';return}recognition=new SR();recognition.lang='pt-BR';recognition.continuous=false;recognition.interimResults=true;recognition.onstart=()=>st.textContent='Pode falar. A Dri vai transformar sua fala em texto — sem armazenar o áudio.';recognition.onresult=e=>{let finalText='',interim='';for(let i=e.resultIndex;i<e.results.length;i++){const p=e.results[i][0].transcript;if(e.results[i].isFinal)finalText+=p;else interim+=p}voiceText=(voiceText+' '+finalText).trim();tr.textContent=(voiceText+' '+interim).trim()};recognition.onerror=e=>st.textContent='Não consegui captar a fala ('+e.error+'). Tente novamente.';recognition.onend=()=>{if(voiceText)st.textContent='Transcrição pronta. Confira antes de salvar.'};recognition.start()}
+function parseVoiceDate(text){const low=text.toLowerCase();if(low.includes('sem data'))return null;if(low.includes('amanhã'))return addDaysISO(1);if(low.includes('hoje'))return todayISO();let m=low.match(/(?:dia\s*)?(\d{1,2})(?:\s*de\s*(janeiro|fevereiro|março|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro))?/);if(m){const day=Number(m[1]);if(day>=1&&day<=31){let month=new Date().getMonth();const names=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];if(m[2])month=names.indexOf(m[2]);let year=new Date().getFullYear();let d=new Date(year,month,day,12);if(d<new Date(new Date().setHours(0,0,0,0))&&!m[2])d=new Date(year,month+1,day,12);return iso(d)}}const days={domingo:0,segunda:1,'segunda-feira':1,terça:2,'terça-feira':2,quarta:3,'quarta-feira':3,quinta:4,'quinta-feira':4,sexta:5,'sexta-feira':5,sábado:6,'sábado':6};for(const k in days)if(low.includes(k)){const d=new Date();const delta=(days[k]-d.getDay()+7)%7||7;d.setDate(d.getDate()+delta);return iso(d)}return todayISO()}
+function saveVoiceTask(){const text=document.getElementById('transcript').textContent.trim();if(!text)return;const cleaned=text.replace(/^dri[,:]?\s*/i,'');tasks.unshift({id:Date.now(),created:Date.now(),t:cleaned,tag:'Trabalho',status:'todo',due:parseVoiceDate(cleaned)});persist();render();document.getElementById('voiceStatus').textContent='Demanda salva com a data identificada. Você pode tocar nela para editar.'}
+render();
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
-</body>
-</html>
+</div></body></html>
