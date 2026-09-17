@@ -1,10 +1,1 @@
-{
-  "name": "DRI — Minhas Demandas",
-  "short_name": "DRI",
-  "start_url": "./",
-  "display": "standalone",
-  "background_color": "#fffaf6",
-  "theme_color": "#b97866",
-  "lang": "pt-BR",
-  "description": "Organizar para respirar."
-}
+{"name":"DRI — Minhas Demandas","short_name":"DRI","start_url":".","display":"standalone","background_color":"#fffaf6","theme_color":"#b97866","lang":"pt-BR"}
